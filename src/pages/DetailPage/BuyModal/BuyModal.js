@@ -61,16 +61,16 @@ function BuyModal({ setBuyModalToggle, product, goToCartModalToggleChange }) {
 
     if (selectObj.imageId === 1) {
       setImageId({ ...imageId, imageId1: selectObj.imageId });
-      setTotalCount({ ...totalCount, total1: 1 });
+      setTotalCount({ ...totalCount, total1: /* totalCount.total1 + */ 1 });
     } else if (selectObj.imageId === 2) {
       setImageId({ ...imageId, imageId2: selectObj.imageId });
-      setTotalCount({ ...totalCount, total2: 1 });
+      setTotalCount({ ...totalCount, total2: /* totalCount.total2 +  */ 1 });
     } else if (selectObj.imageId === 3) {
       setImageId({ ...imageId, imageId3: selectObj.imageId });
-      setTotalCount({ ...totalCount, total3: 1 });
+      setTotalCount({ ...totalCount, total3: /* totalCount.total3 +  */ 1 });
     } else if (selectObj.imageId === 4) {
       setImageId({ ...imageId, imageId4: selectObj.imageId });
-      setTotalCount({ ...totalCount, total4: 1 });
+      setTotalCount({ ...totalCount, total4: /* totalCount.total4 +  */ 1 });
     }
   };
 
