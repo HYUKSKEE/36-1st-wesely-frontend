@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import ItemList from './ItemList';
+
 import API from '../../../config';
+
+import ItemList from './ItemList';
 import './BuyModal.scss';
 
-function BuyModal({ setBuyModalToggle, product }) {
-  const [arrowToggle, setArrowToggle] = useState(true);
+function BuyModal({ setBuyModalToggle, product, goToCartModalToggleChange }) {
   const [selectedItem, setSelectedItem] = useState([]);
+  const [arrowToggle, setArrowToggle] = useState(true);
   const [totalCount, setTotalCount] = useState({
     total1: 0,
     total2: 0,
@@ -18,9 +20,11 @@ function BuyModal({ setBuyModalToggle, product }) {
     imageId3: 0,
     imageId4: 0,
   });
+  console.log('a', selectedItem);
+  console.log('b', totalCount);
 
   const postData = () => {
-    fetch(`${API}/product/cartIn`, {
+    fetch(`${API.cartIn}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -36,6 +40,10 @@ function BuyModal({ setBuyModalToggle, product }) {
         quantity4: totalCount.total4,
       }),
     });
+  };
+
+  const buyModalToggleChange = () => {
+    setArrowToggle(!arrowToggle);
   };
 
   const selectItem = ({ target }) => {
@@ -69,10 +77,6 @@ function BuyModal({ setBuyModalToggle, product }) {
   const deleteItem = id => {
     const filteredItem = [...selectedItem].filter(item => item.imageId !== id);
     setSelectedItem(filteredItem);
-  };
-
-  const buyModalToggleChange = () => {
-    setArrowToggle(!arrowToggle);
   };
 
   const closeBuyModal = () => {
@@ -122,7 +126,13 @@ function BuyModal({ setBuyModalToggle, product }) {
               setTotalCount={setTotalCount}
             />
             <div className="itemBuy">
-              <button className="cartButton" onClick={postData}>
+              <button
+                className="cartButton"
+                onClick={() => {
+                  postData();
+                  selectedItem.length > 0 && goToCartModalToggleChange();
+                }}
+              >
                 장바구니
               </button>
               <button className="buyButton">일반구매</button>

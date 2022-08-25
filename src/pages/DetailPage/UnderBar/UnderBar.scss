@@ -5,6 +5,7 @@
   justify-content: center;
   align-items: center;
   box-shadow: #00000014 0 0 24px;
+  background-color: #ffffff;
 
   &.underBar {
     position: fixed;
@@ -12,6 +13,10 @@
     bottom: 0px;
     left: 0px;
     z-index: 1000;
+  }
+
+  &.NoUnderBar {
+    display: none;
   }
 
   .underBarBox {

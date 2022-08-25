@@ -6,6 +6,7 @@ import PageBtn from './PageBtn/PageBtn';
 import API from '../../config';
 import './ListPage.scss';
 import NavScroll from '../../components/NavScroll/NavScroll';
+import Footer from '../../components/Footer/Footer';
 
 function ListPage() {
   const [productData, setProductData] = useState([]);
@@ -113,6 +114,7 @@ function ListPage() {
           </div>
           <PageBtn movePage={movePage} />
         </main>
+        <Footer />
       </div>
     </>
   );

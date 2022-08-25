@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import Nav from '../../../components/Nav/Nav';
+
+// import Nav from '../../../components/NavScroll/Nav/Nav';
 import './UnderBar.scss';
 
 function UnderBar() {
@@ -13,18 +14,14 @@ function UnderBar() {
   }, []);
 
   const navHandleScroll = e => {
-    e.deltaY > 0 && setUnderBarState('noHeader');
-    window.scrollY > 689 && setUnderBarState('underBar');
-    e.deltaY < 0 && setUnderBarState('fixed');
+    window.scrollY > 424 && setUnderBarState('underBar');
+    window.scrollY < 424 && setUnderBarState('NoUnderBar');
+    window.scrollY > 2650 && setUnderBarState('NoUnderBar');
   };
 
   return (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
-      {barState === '' || barState === 'noHeader' || barState === 'fixed' ? (
-        <Nav navState={barState} />
-      ) : (
-        ''
-      )}
       {barState === 'underBar' && (
         <div className={`underBarContainer ${barState}`}>
           <div className="underBarBox">
