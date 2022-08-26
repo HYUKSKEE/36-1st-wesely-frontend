@@ -1,31 +1,23 @@
-.listPage {
-  .productWrapper {
-    .pageBtnWrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      bottom: 0px;
-      width: 100%;
-      height: 48px;
-      background-color: white;
-      position: fixed;
-      margin: 0 auto;
-      left: 0px;
+.pageBtnWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 48px;
+  background-color: white;
 
-      .pageBtn {
-        font-size: 18px;
-        width: 40px;
-        height: 42px;
-        outline: none;
-        background: none;
-        appearance: none;
-        border: none;
-        cursor: pointer;
-      }
-      .pageBtn:hover {
-        background-color: rgb(240, 240, 240);
-        border-radius: 50%;
-      }
-    }
+  .pageBtn {
+    font-size: 18px;
+    width: 40px;
+    height: 42px;
+    outline: none;
+    background: none;
+    appearance: none;
+    border: none;
+    cursor: pointer;
+  }
+  .pageBtn:hover {
+    background-color: rgb(240, 240, 240);
+    border-radius: 50%;
   }
 }

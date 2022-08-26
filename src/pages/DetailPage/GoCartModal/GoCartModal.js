@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom';
 import './GoCartModal.scss';
 
-function GoCartModal() {
+function GoCartModal({ goToCartModalClose }) {
   return (
     <div className="GoCartModalContainer">
       <div className="GoCartModalBox">
+        <div className="GoCartModalXBtn" onClick={goToCartModalClose}>
+          ×
+        </div>
         <div className="GoCartModalItemInfo">
           <div className="GoCartModalParagraph">
             <img
@@ -17,7 +20,9 @@ function GoCartModal() {
             </div>
           </div>
           <div className="GoCartModalButton">
-            <button className="GoCartModalMore">쇼핑 계속하기</button>
+            <button className="GoCartModalMore" onClick={goToCartModalClose}>
+              쇼핑 계속하기
+            </button>
             <Link to="/Cart" className="GoCartModalCart">
               장바구니 가기
             </Link>

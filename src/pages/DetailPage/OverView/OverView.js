@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import BuyModal from '../BuyModal/BuyModal';
+
 import './OverView.scss';
 
-function OverView({ product }) {
+function OverView({ product, goToCartModalToggleChange }) {
   const [buyModalToggle, setBuyModalToggle] = useState(false);
-
   const displayRating =
     Math.floor(product?.optionData?.map(list => list.avgRating) * 10) / 10;
 
@@ -55,7 +55,11 @@ function OverView({ product }) {
         </div>
       </div>
       {buyModalToggle && (
-        <BuyModal setBuyModalToggle={setBuyModalToggle} product={product} />
+        <BuyModal
+          setBuyModalToggle={setBuyModalToggle}
+          goToCartModalToggleChange={goToCartModalToggleChange}
+          product={product}
+        />
       )}
     </>
   );

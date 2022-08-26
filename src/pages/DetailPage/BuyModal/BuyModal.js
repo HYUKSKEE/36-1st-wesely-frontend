@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import ItemList from './ItemList';
+
 import API from '../../../config';
+
+import ItemList from './ItemList';
 import './BuyModal.scss';
 
-function BuyModal({ setBuyModalToggle, product }) {
-  const [arrowToggle, setArrowToggle] = useState(true);
+function BuyModal({ setBuyModalToggle, product, goToCartModalToggleChange }) {
   const [selectedItem, setSelectedItem] = useState([]);
+  const [arrowToggle, setArrowToggle] = useState(true);
   const [totalCount, setTotalCount] = useState({
     total1: 0,
     total2: 0,
@@ -20,7 +22,7 @@ function BuyModal({ setBuyModalToggle, product }) {
   });
 
   const postData = () => {
-    fetch(`${API}/product/cartIn`, {
+    fetch(`${API.cartIn}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -38,9 +40,12 @@ function BuyModal({ setBuyModalToggle, product }) {
     });
   };
 
-  const selectItem = ({ target }) => {
-    const selectObj = product.productDetail[Number(target.id)];
+  const buyModalToggleChange = () => {
+    setArrowToggle(!arrowToggle);
+  };
 
+  const selectItem = ({ target }, imgId) => {
+    const selectObj = product.productDetail[Number(target.id)];
     if (!selectedItem.includes(selectObj)) {
       setSelectedItem([
         ...selectedItem,
@@ -53,26 +58,22 @@ function BuyModal({ setBuyModalToggle, product }) {
 
     if (selectObj.imageId === 1) {
       setImageId({ ...imageId, imageId1: selectObj.imageId });
-      setTotalCount({ ...totalCount, total1: /* totalCount.total1 + */ 1 });
+      setTotalCount({ ...totalCount, total1: 1 });
     } else if (selectObj.imageId === 2) {
       setImageId({ ...imageId, imageId2: selectObj.imageId });
-      setTotalCount({ ...totalCount, total2: /* totalCount.total2 +  */ 1 });
+      setTotalCount({ ...totalCount, total2: 1 });
     } else if (selectObj.imageId === 3) {
       setImageId({ ...imageId, imageId3: selectObj.imageId });
-      setTotalCount({ ...totalCount, total3: /* totalCount.total3 +  */ 1 });
+      setTotalCount({ ...totalCount, total3: 1 });
     } else if (selectObj.imageId === 4) {
       setImageId({ ...imageId, imageId4: selectObj.imageId });
-      setTotalCount({ ...totalCount, total4: /* totalCount.total4 +  */ 1 });
+      setTotalCount({ ...totalCount, total4: 1 });
     }
   };
 
   const deleteItem = id => {
     const filteredItem = [...selectedItem].filter(item => item.imageId !== id);
     setSelectedItem(filteredItem);
-  };
-
-  const buyModalToggleChange = () => {
-    setArrowToggle(!arrowToggle);
   };
 
   const closeBuyModal = () => {
@@ -122,7 +123,13 @@ function BuyModal({ setBuyModalToggle, product }) {
               setTotalCount={setTotalCount}
             />
             <div className="itemBuy">
-              <button className="cartButton" onClick={postData}>
+              <button
+                className="cartButton"
+                onClick={() => {
+                  postData();
+                  selectedItem.length > 0 && goToCartModalToggleChange();
+                }}
+              >
                 장바구니
               </button>
               <button className="buyButton">일반구매</button>
