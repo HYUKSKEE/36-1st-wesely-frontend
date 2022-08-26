@@ -9,23 +9,26 @@ function BuyModal({ setBuyModalToggle, product, goToCartModalToggleChange }) {
   const [selectedItem, setSelectedItem] = useState([]);
   const [arrowToggle, setArrowToggle] = useState(true);
   const [totalCount, setTotalCount] = useState({
-    total1: 0,
-    total2: 0,
-    total3: 0,
-    total4: 0,
+    total1: null,
+    total2: null,
+    total3: null,
+    total4: null,
   });
   const [imageId, setImageId] = useState({
-    imageId1: 0,
-    imageId2: 0,
-    imageId3: 0,
-    imageId4: 0,
+    imageId1: null,
+    imageId2: null,
+    imageId3: null,
+    imageId4: null,
   });
+
+  const token = localStorage.getItem('token');
 
   const postData = () => {
     fetch(`${API.cartIn}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        authorization: token,
       },
       body: JSON.stringify({
         imageId1: imageId.imageId1,
@@ -127,7 +130,7 @@ function BuyModal({ setBuyModalToggle, product, goToCartModalToggleChange }) {
                 className="cartButton"
                 onClick={() => {
                   postData();
-                  selectedItem.length > 0 && goToCartModalToggleChange();
+                  if (selectedItem.length > 0) goToCartModalToggleChange();
                 }}
               >
                 장바구니

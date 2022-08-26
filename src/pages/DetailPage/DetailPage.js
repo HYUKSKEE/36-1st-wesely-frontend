@@ -16,7 +16,7 @@ function DetailPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [goToCartToggle, setGoToCartToggle] = useState(false);
   const goToCartModalToggleChange = () => {
-    setGoToCartToggle(prev => !prev);
+    setGoToCartToggle(!goToCartToggle);
   };
 
   const goToCartModalClose = () => {
