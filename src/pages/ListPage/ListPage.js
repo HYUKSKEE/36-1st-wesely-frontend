@@ -112,10 +112,10 @@ function ListPage() {
               <ProductCard key={product.id} {...product} />
             ))}
           </div>
-          <PageBtn movePage={movePage} />
         </main>
-        <Footer />
+        <PageBtn movePage={movePage} />
       </div>
+      <Footer />
     </>
   );
 }
