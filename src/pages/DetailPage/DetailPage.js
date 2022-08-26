@@ -19,7 +19,6 @@ function DetailPage() {
     setGoToCartToggle(prev => !prev);
   };
 
-  console.log(product);
   const goToCartModalClose = () => {
     setGoToCartToggle(false);
   };
