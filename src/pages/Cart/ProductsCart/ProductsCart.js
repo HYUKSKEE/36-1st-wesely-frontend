@@ -3,14 +3,13 @@ import CartItem from './CartItem/CartItem';
 import API from '../../../config';
 import './ProductsCart.scss';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react';
+import { useNavigate } from 'react-router-dom';
 const ProductsCart = ({
   products,
   setProducts,
   subscriptionCycle,
   setSubscriptionCycle,
 }) => {
-  const navigate = useNavigate();
   const totalPrice = products?.reduce(
     (acc, cur) => acc + Number(cur.price * cur.totalQuantity),
     0
@@ -22,17 +21,32 @@ const ProductsCart = ({
   const remainPoint = (Number(point) - Number(totalPrice)).toLocaleString();
   const isPurchaseUnable = point - totalPrice < 0;
 
-  function pay() {
-    fetch(`${API.cart}/order/user/1`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: {
-        subscription_id: subscriptionCycle || 0,
-        point: Number(point) - Number(totalPrice),
-      },
-    });
-    navigate('/');
-  }
+  const navigate = useNavigate();
+  // function pay() {
+  //   fetch(API.cart, {
+  //     method: 'PATCH',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: {
+  //       subscription_id: subscriptionCycle || 0,
+  //       point: Number(point) - Number(totalPrice),
+  //     },
+  //   });
+  //   navigate('/');
+  // }
+
+  // function order() {
+  //   fetch(`${API.cart}/order/image/${image_id}`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       authorization: localStorage.getItem('token'),
+  //     },
+  //     body: {
+  //       subscriptionId: subscriptionCycle || 0,
+  //       point: Number(point) - Number(totalPrice),
+  //     },
+  //   });
+  // }
 
   return (
     <>
@@ -99,7 +113,7 @@ const ProductsCart = ({
         <button
           className={`purchaseBtn ${!isPurchaseUnable}`}
           disabled={isPurchaseUnable}
-          onClick={pay}
+          onClick={() => navigate('/')}
         >
           결제하기
         </button>

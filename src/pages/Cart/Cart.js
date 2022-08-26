@@ -8,8 +8,12 @@ const Cart = () => {
   const [products, setProducts] = useState([]);
   const [subscriptionCycle, setSubscriptionCycle] = useState('');
   useEffect(() => {
-    fetch(`${API.cart}/user/1`, {
+    fetch(API.cart, {
       method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: localStorage.getItem('token'),
+      },
     })
       .then(res => res.json())
       .then(setProducts);

@@ -16,9 +16,12 @@ const CartItem = ({
   const [isOutOfstock, setiIOutOfstock] = useState(false);
 
   function quantityPlus() {
-    fetch(`${API.cart}/plus/user/${user_id}/image/${image_id}`, {
+    fetch(`${API.cart}/plus/image/${image_id}`, {
       method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: localStorage.getItem('token'),
+      },
     })
       .then(response => response.json())
       .then(validData => {
@@ -38,9 +41,12 @@ const CartItem = ({
 
   function quantityMinus() {
     if (totalQuantity > 1) {
-      fetch(`${API.cart}/minus/user/${user_id}/image/${image_id}`, {
+      fetch(`${API.cart}/minus/image/${image_id}`, {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: localStorage.getItem('token'),
+        },
       });
       if (isOutOfstock) setiIOutOfstock(false);
       setProducts(
@@ -54,13 +60,15 @@ const CartItem = ({
   }
 
   function productDelete() {
-    fetch(`${API.cart}/user/${user_id}/image/${image_id}`, {
+    fetch(`${API.cart}/image/${image_id}`, {
       method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: localStorage.getItem('token'),
+      },
     });
     setProducts(products.filter(product => product.image_id !== image_id));
   }
-
   return (
     <div className="itemContainer">
       <div className="imgCover">
